@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+ResIQ - Smart Research. Faster Insights.
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="animated-bg"></div>
+
+
+
+<nav class="navbar">
+
+
+<div class="logo">
+
+
+<div class="logo-icon">
+R
+</div>
+
+
+<div>
+
+<h2>
+ResIQ
+</h2>
+
+
+<p>
+Smart Research. Faster Insights.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</nav>
+
+
+
+
+
+<section class="hero">
+
+
+
+<div class="hero-card">
+
+
+<div class="badge">
+
+AI Research Assistant
+
+</div>
+
+
+
+
+<h1>
+
+AI-Powered Research Assistant
+
+</h1>
+
+
+
+<p class="hero-text">
+
+Generate detailed academic research,
+literature review and real scientific insights.
+
+</p>
+
+
+
+
+
+
+<div class="input-container">
+
+
+<input
+
+type="text"
+
+id="topic"
+
+placeholder="Enter research topic"
+
+>
+
+
+
+<button
+
+onclick="generateResearch()"
+
+>
+
+Generate Research
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="features-section">
+
+
+<h2 class="section-title">
+
+Features
+
+</h2>
+
+
+
+
+<div class="feature-grid">
+
+
+<div class="feature-card">
+
+<h3>
+Research Title Generator
+</h3>
+
+<p>
+Create research titles instantly.
+</p>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<h3>
+Abstract Writer
+</h3>
+
+<p>
+Generate detailed academic abstracts.
+</p>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<h3>
+Literature Review
+</h3>
+
+<p>
+Analyze previous research studies.
+</p>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<h3>
+Reference Finder
+</h3>
+
+<p>
+Find scientific resources.
+</p>
+
+</div>
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="research-section">
+
+
+
+<div class="research-header">
+
+
+<h2>
+
+Research Output
+
+</h2>
+
+
+
+
+<div>
+
+
+<button onclick="copyResearch()">
+
+Copy
+
+</button>
+
+
+
+<button onclick="downloadPDF()">
+
+Download PDF
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="loading" class="loading-box">
+
+
+<div class="loader"></div>
+
+
+<p>
+
+Generating research...
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="output" class="output-card">
+
+
+
+<h3>
+
+Your research output will appear here
+
+</h3>
+
+
+
+<p>
+
+Enter a topic and click Generate Research.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+<h3>
+
+ResIQ
+
+</h3>
+
+
+
+<p>
+
+Smart Research. Faster Insights.
+
+</p>
+
+
+<p>
+
+AI powered research assistant for students and researchers.
+
+</p>
+
+
+
+</footer>
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html>
