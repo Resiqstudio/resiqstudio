@@ -1,76 +1,14 @@
 // =====================================
-// ResIQ AI Research Assistant
-// OpenRouter AI Version
+// ResIQ AI Assistant
+// OpenRouter AI
 // =====================================
 
-
-// ADD YOUR OPENROUTER API KEY
 
 const OPENROUTER_API_KEY = "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";
 
 
-let currentResearch = "";
 
-
-
-// =====================================
-// Loading Screen
-// =====================================
-
-function loadingTemplate(topic){
-
-return `
-
-<h1>ResIQ Research Report</h1>
-
-<h2>${topic}</h2>
-
-
-<p>
-
-🤖 AI is generating your research...
-
-<br><br>
-
-✓ Research Titles
-
-<br>
-
-✓ Abstract
-
-<br>
-
-✓ Introduction
-
-<br>
-
-✓ Literature Review
-
-<br>
-
-✓ Methodology
-
-<br>
-
-✓ Questionnaire
-
-<br>
-
-✓ References
-
-</p>
-
-`;
-
-}
-
-
-
-
-// =====================================
-// AI CONNECTION
-// =====================================
-
+// AI Function
 
 async function askAI(prompt){
 
@@ -85,69 +23,50 @@ method:"POST",
 
 headers:{
 
-
 "Authorization":
-
 "Bearer " + OPENROUTER_API_KEY,
 
-
 "Content-Type":
-
 "application/json"
-
 
 },
 
 
 body:JSON.stringify({
 
-
 model:"google/gemma-3-4b-it",
 
-
 messages:[
-
 
 {
 
 role:"system",
 
 content:
-
-"You are ResIQ AI, an expert academic research assistant. Give accurate scientific answers."
+"You are ResIQ AI academic research assistant."
 
 },
 
 
 {
 
-
 role:"user",
 
 content:prompt
 
-
 }
-
 
 ]
 
-
 })
 
-
 }
-
 
 );
 
 
 
 let data = await response.json();
-
-
-
-console.log(data);
 
 
 
@@ -162,10 +81,7 @@ return "AI Error: " + data.error.message;
 return data.choices[0].message.content;
 
 
-
 }
-
-
 
 
 
@@ -180,15 +96,17 @@ return data.choices[0].message.content;
 async function generateResearch(){
 
 
-
 let topic =
-
 document.getElementById("topic").value;
 
 
 
-if(topic.trim()==""){
+let output =
+document.getElementById("output");
 
+
+
+if(topic==""){
 
 alert("Enter research topic");
 
@@ -198,27 +116,16 @@ return;
 
 
 
-
-let output =
-
-document.getElementById("output");
-
-
-
 output.innerHTML =
-
-loadingTemplate(topic);
-
+"🤖 AI generating research...";
 
 
-try{
 
 
 let result = await askAI(`
 
 
-Create a complete academic research proposal on:
-
+Create academic research proposal about:
 
 ${topic}
 
@@ -226,76 +133,43 @@ ${topic}
 
 Include:
 
+Research Title
 
-1. Research Title Suggestions
+Abstract
 
+Introduction
 
-2. Abstract
+Background Study
 
+Literature Review
 
-3. Introduction
+Objectives
 
+Methodology
 
-4. Background of Study
+Questionnaire
 
+Conclusion
 
-5. Literature Review
+References
 
-
-6. Aim
-
-
-7. Objectives
-
-
-8. Research Questions
-
-
-9. Methodology
-
-
-10. Questionnaire (15 questions)
-
-
-11. Expected Outcomes
-
-
-12. Conclusion
-
-
-13. References
-
-
-14. Information Sources
-
-
-Write professional academic content.
 
 
 `);
 
 
 
-
-currentResearch=result;
-
-
-
-output.innerHTML=
-
+output.innerHTML =
 
 `
 
-<h1>
-ResIQ Research Report
-</h1>
+<h2>ResIQ Research Report</h2>
 
-
-<div>
+<p>
 
 ${result.replace(/\n/g,"<br>")}
 
-</div>
+</p>
 
 `;
 
@@ -303,20 +177,6 @@ ${result.replace(/\n/g,"<br>")}
 
 }
 
-
-catch(error){
-
-
-output.innerHTML=
-
-"Error: "+error;
-
-
-}
-
-
-
-}
 
 
 
@@ -339,67 +199,48 @@ document.getElementById("searchBox").value;
 
 
 
-if(query.trim()==""){
-
-
-alert("Enter correction");
-
-return;
-
-
-}
-
-
-
 let output =
 
 document.getElementById("output");
 
 
 
+if(query==""){
+
+alert("Enter correction");
+
+return;
+
+}
+
+
+
 output.innerHTML =
-
-`
-
-<h2>
-🤖 AI Checking...
-</h2>
-
-`;
+"🤖 AI checking...";
 
 
 
 
-
-try{
-
-
-let answer = await askAI(`
+let result = await askAI(`
 
 
 You are a research editor.
 
 
-Correct and improve this research content:
+Correct this:
 
 
 ${query}
 
 
 
-Provide:
+Give:
 
+1. Problems
 
-1. Problems found
+2. Improved version
 
-
-2. Corrected version
-
-
-3. Suggestions for improvement
-
-
-Use academic writing style.
+3. Suggestions
 
 
 
@@ -407,20 +248,16 @@ Use academic writing style.
 
 
 
-
 output.innerHTML =
-
 
 `
 
-<h2>
-Research Correction
-</h2>
+<h2>Research Correction</h2>
 
 
 <p>
 
-${answer.replace(/\n/g,"<br>")}
+${result.replace(/\n/g,"<br>")}
 
 </p>
 
@@ -433,47 +270,25 @@ ${answer.replace(/\n/g,"<br>")}
 
 
 
-catch(error){
-
-
-output.innerHTML=
-
-"Error: "+error;
-
-
-}
-
-
-
-}
-
-
-
-
 
 
 // =====================================
-// COPY
+// Copy
 // =====================================
 
 
 function copyResearch(){
 
 
-
 let text =
 
 document.getElementById("output").innerText;
 
 
-
 navigator.clipboard.writeText(text);
 
 
-
-alert("Copied successfully");
-
-
+alert("Copied");
 
 }
 
@@ -481,47 +296,30 @@ alert("Copied successfully");
 
 
 
-
-
 // =====================================
-// PDF DOWNLOAD
+// PDF
 // =====================================
 
 
 function downloadPDF(){
 
 
-
 const {jsPDF}=window.jspdf;
-
 
 
 let pdf=new jsPDF();
 
 
-
-let text =
+let text=
 
 document.getElementById("output").innerText;
 
 
 
-let lines =
-
-pdf.splitTextToSize(text,180);
+pdf.text(text,10,10);
 
 
-
-pdf.text(lines,10,10);
-
-
-
-pdf.save(
-
-"ResIQ_Research_Report.pdf"
-
-);
-
+pdf.save("ResIQ.pdf");
 
 
 }
