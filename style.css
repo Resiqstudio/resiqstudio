@@ -1,304 +1,471 @@
-// =====================================
-// ResIQ AI Research Assistant
-// OpenRouter AI Version
-// =====================================
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
 
-// ADD YOUR OPENROUTER API KEY
-
-const OPENROUTER_API_KEY = "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";
-
-
-let currentResearch = "";
+html{
+scroll-behavior:smooth;
+}
 
 
+body{
 
-
-// =====================================
-// Loading Screen
-// =====================================
-
-function loadingTemplate(topic){
-
-return `
-
-<h1>ResIQ Research Report</h1>
-
-<h2>${topic}</h2>
-
-
-<p>
-
-🤖 AI is generating your research...
-
-<br><br>
-
-✓ Research Titles
-
-<br>
-
-✓ Abstract
-
-<br>
-
-✓ Introduction
-
-<br>
-
-✓ Background Study
-
-<br>
-
-✓ Literature Review
-
-<br>
-
-✓ Methodology
-
-<br>
-
-✓ Questionnaire
-
-<br>
-
-✓ References
-
-</p>
-
-`;
+background:#020617;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
 
 }
 
 
 
+/* BACKGROUND */
 
-// =====================================
-// AI CONNECTION
-// =====================================
+.animated-bg{
 
+position:fixed;
+top:0;
+left:0;
 
-async function getAIResearch(topic){
+width:100%;
+height:100%;
 
 
+background:
 
-let response = await fetch(
+linear-gradient(
+120deg,
+#2563eb,
+#7c3aed,
+#06b6d4
+);
 
-"https://openrouter.ai/api/v1/chat/completions",
 
-{
+opacity:.20;
 
+filter:blur(100px);
 
-method:"POST",
 
+animation:bgMove 12s infinite alternate;
 
-headers:{
 
-
-"Authorization":
-
-"Bearer " + OPENROUTER_API_KEY,
-
-
-"Content-Type":
-
-"application/json"
-
-
-},
-
-
-
-body:JSON.stringify({
-
-
-
-model:"google/gemma-3-4b-it",
-
-
-
-messages:[
-
-
-{
-
-role:"system",
-
-content:
-
-"You are ResIQ, an academic research assistant. Give accurate scientific answers."
-
-},
-
-
-
-{
-
-
-role:"user",
-
-content:`
-
-
-Create a complete academic research proposal on:
-
-
-${topic}
-
-
-
-Include:
-
-
-
-1. Research Title Suggestions (5)
-
-
-
-2. Abstract
-
-
-
-3. Introduction
-
-
-
-4. Background of Study
-
-
-
-5. Literature Review
-
-
-Include:
-
-Author
-
-Year
-
-Study title
-
-Findings
-
-Research gap
-
-
-
-6. Aim
-
-
-
-7. Objectives
-
-
-
-8. Research Questions
-
-
-
-9. Methodology
-
-
-Include:
-
-
-Research design
-
-Study population
-
-Sample size calculation
-
-Sampling technique
-
-Inclusion criteria
-
-Exclusion criteria
-
-Data collection
-
-Data analysis
-
-Ethical considerations
-
-
-
-10. Questionnaire
-
-
-Create 15 questions.
-
-
-
-11. Expected Outcomes
-
-
-
-12. Conclusion
-
-
-
-13. References
-
-
-Use real references only.
-Do not invent DOI.
-
-
-
-14. Information Sources
-
-
-Explain:
-
-Databases searched
-
-Research evidence
-
-Selection method
-
-Limitations
-
-
-
-Write in professional academic style.
-
-
-
-`
-
-}
-
-
-]
-
-
-})
+z-index:-1;
 
 
 }
 
 
 
+@keyframes bgMove{
+
+0%{
+
+transform:translateX(-100px);
+
+}
+
+
+100%{
+
+transform:translateX(100px);
+
+}
+
+
+}
+
+
+
+/* NAVBAR */
+
+
+.navbar{
+
+
+width:90%;
+
+margin:25px auto;
+
+
+padding:20px 35px;
+
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+
+background:
+
+rgba(30,41,59,.75);
+
+
+backdrop-filter:blur(20px);
+
+
+border-radius:25px;
+
+
+border:
+
+1px solid rgba(255,255,255,.1);
+
+
+}
+
+
+
+/* LOGO */
+
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+
+
+.logo-icon{
+
+
+width:60px;
+
+height:60px;
+
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+
+border-radius:20px;
+
+
+font-size:30px;
+
+
+font-weight:bold;
+
+
+
+background:
+
+linear-gradient(
+45deg,
+#2563eb,
+#7c3aed
+);
+
+
+}
+
+
+
+.logo h2{
+
+font-size:32px;
+
+}
+
+
+
+.logo p{
+
+font-size:13px;
+
+color:#cbd5e1;
+
+}
+
+
+
+
+/* MENU */
+
+
+.nav-links a{
+
+
+color:white;
+
+text-decoration:none;
+
+
+margin-left:25px;
+
+
+transition:.3s;
+
+
+}
+
+
+.nav-links a:hover{
+
+
+color:#06b6d4;
+
+
+}
+
+
+
+
+
+/* HERO */
+
+
+.hero{
+
+
+min-height:85vh;
+
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+
+padding:30px;
+
+
+}
+
+
+
+.hero-card{
+
+
+width:100%;
+
+max-width:900px;
+
+
+padding:55px;
+
+
+text-align:center;
+
+
+background:
+
+rgba(30,41,59,.65);
+
+
+backdrop-filter:blur(25px);
+
+
+
+border-radius:40px;
+
+
+border:
+
+1px solid rgba(255,255,255,.1);
+
+
+box-shadow:
+
+0 0 40px rgba(37,99,235,.2);
+
+
+}
+
+
+
+
+.badge{
+
+
+display:inline-block;
+
+
+padding:10px 25px;
+
+
+border-radius:30px;
+
+
+background:
+
+linear-gradient(
+45deg,
+#2563eb,
+#7c3aed
+);
+
+
+margin-bottom:25px;
+
+
+}
+
+
+
+
+.hero h1{
+
+
+font-size:55px;
+
+
+
+background:
+
+linear-gradient(
+90deg,
+#06b6d4,
+#7c3aed
+);
+
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+
+
+}
+
+
+
+.hero-text{
+
+
+margin:20px auto;
+
+
+max-width:700px;
+
+
+color:#cbd5e1;
+
+
+font-size:18px;
+
+
+}
+
+
+
+/* AI SEARCH */
+
+
+.input-container{
+
+
+display:flex;
+
+
+gap:15px;
+
+
+margin-top:35px;
+
+
+}
+
+
+
+
+.input-container input,
+.input-container textarea{
+
+
+width:100%;
+
+
+padding:18px;
+
+
+border:none;
+
+
+outline:none;
+
+
+
+border-radius:20px;
+
+
+background:#1e293b;
+
+
+color:white;
+
+
+
+font-size:16px;
+
+
+}
+
+
+
+textarea{
+
+
+resize:none;
+
+height:120px;
+
+
+}
+
+
+
+
+button{
+
+
+padding:16px 35px;
+
+
+border:none;
+
+
+border-radius:20px;
+
+
+cursor:pointer;
+
+
+font-size:16px;
+
+
+font-weight:bold;
+
+
+color:white;
+
+
+
+background:
+
+
+linear-gradient(
+45deg,
+#2563eb,
+#7c3aed
 );
 
 
 
-let data = await response.json();
-
-
-
-console.log(data);
-
-
-
-if(data.error){
-
-return "AI Error: " + data.error.message;
-
-}
-
-
-
-return data.choices[0].message.content;
+transition:.3s;
 
 
 
@@ -306,32 +473,60 @@ return data.choices[0].message.content;
 
 
 
+button:hover{
+
+
+transform:translateY(-5px);
+
+
+box-shadow:
+
+0 0 30px #2563eb;
+
+
+}
 
 
 
-
-// =====================================
-// Generate Research
-// =====================================
+/* OUTPUT */
 
 
-async function generateResearch(){
+.output-card{
+
+
+margin-top:35px;
+
+
+padding:35px;
+
+
+text-align:left;
+
+
+background:#1e293b;
+
+
+border-radius:25px;
+
+
+border:
+
+1px solid rgba(255,255,255,.1);
+
+
+line-height:1.8;
 
 
 
-let topic =
-
-document.getElementById("topic").value;
+}
 
 
 
-if(topic.trim()==""){
+.output-card h2,
+.output-card h3{
 
 
-alert("Enter research topic");
-
-
-return;
+color:#06b6d4;
 
 
 }
@@ -339,119 +534,126 @@ return;
 
 
 
-let output =
-
-document.getElementById("output");
+/* LOADING */
 
 
-
-output.innerHTML =
-
-loadingTemplate(topic);
+.loading-box{
 
 
-
-try{
-
-
-let result =
-
-await getAIResearch(topic);
+display:none;
 
 
-
-currentResearch=result;
-
-
-
-output.innerHTML=
-
-
-`
-
-<h1>
-ResIQ Research Report
-</h1>
-
-
-<div>
-
-${result.replace(/\n/g,"<br>")}
-
-</div>
-
-`;
-
-
-
-}
-
-
-catch(error){
-
-
-output.innerHTML=
-
-"Error: "+error;
-
-
-}
+margin-top:30px;
 
 
 }
 
 
 
+.loader{
+
+
+width:60px;
+
+height:60px;
+
+
+border-radius:50%;
 
 
 
+border:
 
-// =====================================
-// Research Correction Search
-// =====================================
-
-
-async function searchCorrection(){
-
-
-let query =
-
-document.getElementById("searchBox").value;
+5px solid #334155;
 
 
 
-if(query==""){
+border-top:
+
+5px solid #06b6d4;
 
 
-alert("Enter correction");
+
+margin:auto;
 
 
-return;
+
+animation:
+
+spin 1s linear infinite;
+
 
 
 }
 
 
 
-document.getElementById("result").innerHTML=
-
-"AI checking...";
+@keyframes spin{
 
 
+100%{
+
+transform:rotate(360deg);
+
+}
 
 
-let answer = await getAIResearch(
+}
 
-"Correct this research content: "+query
 
+
+
+
+/* FEATURES */
+
+
+section{
+
+
+width:90%;
+
+
+margin:100px auto;
+
+
+}
+
+
+
+.section-title{
+
+
+text-align:center;
+
+
+font-size:40px;
+
+
+margin-bottom:45px;
+
+
+}
+
+
+
+
+.feature-grid{
+
+
+display:grid;
+
+
+
+grid-template-columns:
+
+repeat(
+auto-fit,
+minmax(260px,1fr)
 );
 
 
 
-document.getElementById("result").innerHTML=
-
-
-answer.replace(/\n/g,"<br>");
+gap:30px;
 
 
 
@@ -460,29 +662,42 @@ answer.replace(/\n/g,"<br>");
 
 
 
+.feature-card{
+
+
+background:#1e293b;
+
+
+padding:35px;
+
+
+border-radius:30px;
 
 
 
-// =====================================
-// COPY
-// =====================================
+border:
 
-
-function copyResearch(){
+1px solid rgba(255,255,255,.1);
 
 
 
-let text =
-
-document.getElementById("output").innerText;
+transition:.3s;
 
 
-
-navigator.clipboard.writeText(text);
+}
 
 
 
-alert("Copied successfully");
+.feature-card:hover{
+
+
+transform:translateY(-12px);
+
+
+
+box-shadow:
+
+0 0 35px rgba(37,99,235,.4);
 
 
 
@@ -490,48 +705,124 @@ alert("Copied successfully");
 
 
 
+.feature-card h3{
+
+
+color:#06b6d4;
+
+
+}
+
+
+
+.feature-card p{
+
+
+margin-top:12px;
+
+
+color:#cbd5e1;
+
+
+}
 
 
 
 
-// =====================================
-// PDF DOWNLOAD
-// =====================================
+/* FOOTER */
 
 
-function downloadPDF(){
+.footer{
 
 
-
-const {jsPDF}=window.jspdf;
-
+padding:50px;
 
 
-let pdf=new jsPDF();
+text-align:center;
 
 
+background:#020617;
 
-let text=
 
-document.getElementById("output").innerText;
+}
 
 
 
-let lines=
-
-pdf.splitTextToSize(text,180);
+.footer p{
 
 
-
-pdf.text(lines,10,10);
-
+color:#cbd5e1;
 
 
-pdf.save(
+}
 
-"ResIQ_Research_Report.pdf"
 
-);
+
+
+/* MOBILE */
+
+
+@media(max-width:700px){
+
+
+.navbar{
+
+
+flex-direction:column;
+
+gap:20px;
+
+
+}
+
+
+.nav-links a{
+
+
+margin:10px;
+
+
+}
+
+
+
+.hero h1{
+
+
+font-size:35px;
+
+
+}
+
+
+
+.hero-card{
+
+
+padding:30px;
+
+
+}
+
+
+
+.input-container{
+
+
+flex-direction:column;
+
+
+}
+
+
+
+button{
+
+
+width:100%;
+
+
+}
 
 
 
