@@ -4,23 +4,17 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 <title>
 ResIQ - Smart Research. Faster Insights.
 </title>
 
-
 <link rel="stylesheet" href="style.css">
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-
 </head>
-
 
 
 <body>
@@ -29,12 +23,9 @@ ResIQ - Smart Research. Faster Insights.
 <div class="animated-bg"></div>
 
 
-
 <nav class="navbar">
 
-
 <div class="logo">
-
 
 <div class="logo-icon">
 R
@@ -47,7 +38,6 @@ R
 ResIQ
 </h2>
 
-
 <p>
 Smart Research. Faster Insights.
 </p>
@@ -55,13 +45,9 @@ Smart Research. Faster Insights.
 
 </div>
 
-
 </div>
 
-
-
 </nav>
-
 
 
 
@@ -69,37 +55,54 @@ Smart Research. Faster Insights.
 <section class="hero">
 
 
-
 <div class="hero-card">
 
 
 <div class="badge">
-
 AI Research Assistant
-
 </div>
 
 
 
-
 <h1>
-
 AI-Powered Research Assistant
-
 </h1>
 
 
 
 <p class="hero-text">
 
-Generate detailed academic research,
-literature review and real scientific insights.
+Generate research titles, abstracts,
+literature reviews and academic content.
 
 </p>
 
 
 
 
+<div class="input-container">
+
+
+<input
+type="text"
+id="topic"
+placeholder="Enter research topic"
+/>
+
+
+
+<button onclick="generateResearch()">
+
+Generate Research
+
+</button>
+
+
+</div>
+
+
+
+<br>
 
 
 <div class="input-container">
@@ -109,36 +112,28 @@ literature review and real scientific insights.
 
 type="text"
 
-id="topic"
+id="searchBox"
 
-placeholder="Enter research topic"
-
->
-
-
-
-<button
-
-onclick="generateResearch()"
+placeholder="Search correction or improve your research"
 
 >
 
-Generate Research
+
+<button onclick="searchCorrection()">
+
+Search
 
 </button>
 
 
-
 </div>
 
 
 
 </div>
-
 
 
 </section>
-
 
 
 
@@ -157,8 +152,8 @@ Features
 
 
 
-
 <div class="feature-grid">
+
 
 
 <div class="feature-card">
@@ -175,8 +170,6 @@ Create research titles instantly.
 
 
 
-
-
 <div class="feature-card">
 
 <h3>
@@ -184,11 +177,10 @@ Abstract Writer
 </h3>
 
 <p>
-Generate detailed academic abstracts.
+Generate academic abstracts.
 </p>
 
 </div>
-
 
 
 
@@ -200,11 +192,10 @@ Literature Review
 </h3>
 
 <p>
-Analyze previous research studies.
+Analyze previous studies.
 </p>
 
 </div>
-
 
 
 
@@ -212,20 +203,17 @@ Analyze previous research studies.
 <div class="feature-card">
 
 <h3>
-Reference Finder
+Research Correction
 </h3>
 
 <p>
-Find scientific resources.
+Improve academic writing.
 </p>
 
 </div>
 
 
-
-
 </div>
-
 
 
 </section>
@@ -236,22 +224,15 @@ Find scientific resources.
 
 
 
-
-
 <section class="research-section">
-
 
 
 <div class="research-header">
 
 
 <h2>
-
 Research Output
-
 </h2>
-
-
 
 
 <div>
@@ -272,15 +253,10 @@ Download PDF
 </button>
 
 
-
 </div>
 
 
 </div>
-
-
-
-
 
 
 
@@ -288,22 +264,13 @@ Download PDF
 
 <div id="loading" class="loading-box">
 
-
 <div class="loader"></div>
 
-
 <p>
-
-Generating research...
-
+AI generating...
 </p>
 
-
 </div>
-
-
-
-
 
 
 
@@ -312,27 +279,17 @@ Generating research...
 <div id="output" class="output-card">
 
 
-
 <h3>
-
 Your research output will appear here
-
 </h3>
 
 
-
 <p>
-
-Enter a topic and click Generate Research.
-
+Enter topic and generate research.
 </p>
 
 
-
 </div>
-
-
-
 
 
 
@@ -345,38 +302,25 @@ Enter a topic and click Generate Research.
 
 
 
-
-
 <footer class="footer">
 
 
 <h3>
-
 ResIQ
-
 </h3>
 
 
-
 <p>
-
 Smart Research. Faster Insights.
-
 </p>
 
 
 <p>
-
 AI powered research assistant for students and researchers.
-
 </p>
-
 
 
 </footer>
-
-
-
 
 
 
@@ -385,6 +329,5 @@ AI powered research assistant for students and researchers.
 
 
 </body>
-
 
 </html>
