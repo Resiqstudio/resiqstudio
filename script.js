@@ -30,10 +30,11 @@ loading.style.display = "block";
 
 output.innerHTML = "";
 
-setTimeout(() => {
-
 loading.style.display = "none";
 
+// show result immediately
+
+output.innerHTML = currentResearch;
 currentResearch = `
 
 Research Title
