@@ -1,333 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
+// Generate Research
 
-<head>
+function generateResearch(){
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-ResIQ - Smart Research. Faster Insights.
-</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-</head>
+let topic = document.getElementById("topic").value;
 
 
-<body>
+let output = document.getElementById("output");
+let loading = document.getElementById("loading");
 
 
-<div class="animated-bg"></div>
+if(topic==""){
+
+alert("Enter research topic");
+
+return;
+
+}
 
 
-<nav class="navbar">
+loading.style.display="block";
 
-<div class="logo">
-
-<div class="logo-icon">
-R
-</div>
+output.innerHTML="";
 
 
-<div>
+setTimeout(()=>{
 
-<h2>
-ResIQ
-</h2>
+
+loading.style.display="none";
+
+
+output.innerHTML = `
+
+<h2>Research Title</h2>
 
 <p>
-Smart Research. Faster Insights.
+AI Based Study on ${topic}
 </p>
 
 
-</div>
-
-</div>
-
-</nav>
-
-
-
-
-<section class="hero">
-
-
-<div class="hero-card">
-
-
-<div class="badge">
-AI Research Assistant
-</div>
-
-
-
-<h1>
-AI-Powered Research Assistant
-</h1>
-
-
-
-<p class="hero-text">
-
-Generate research titles, abstracts,
-literature reviews and academic content.
-
-</p>
-
-
-
-
-<div class="input-container">
-
-
-<input
-type="text"
-id="topic"
-placeholder="Enter research topic"
-/>
-
-
-
-<button onclick="generateResearch()">
-
-Generate Research
-
-</button>
-
-
-</div>
-
-
-
-<br>
-
-
-<div class="input-container">
-
-
-<input
-
-type="text"
-
-id="searchBox"
-
-placeholder="Search correction or improve your research"
-
->
-
-
-<button onclick="searchCorrection()">
-
-Search
-
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="features-section">
-
-
-<h2 class="section-title">
-
-Features
-
-</h2>
-
-
-
-<div class="feature-grid">
-
-
-
-<div class="feature-card">
-
-<h3>
-Research Title Generator
-</h3>
+<h2>Abstract</h2>
 
 <p>
-Create research titles instantly.
+This research focuses on ${topic}. 
+The study aims to analyze important factors,
+collect evidence and provide scientific insights.
 </p>
 
-</div>
 
-
-
-<div class="feature-card">
-
-<h3>
-Abstract Writer
-</h3>
+<h2>Introduction</h2>
 
 <p>
-Generate academic abstracts.
+${topic} is an important area of research.
+This study explores current challenges and solutions.
 </p>
 
-</div>
 
-
-
-
-<div class="feature-card">
-
-<h3>
-Literature Review
-</h3>
+<h2>Methodology</h2>
 
 <p>
-Analyze previous studies.
+Study design, sample size, data collection,
+and statistical analysis will be included.
 </p>
 
-</div>
 
-
-
-
-<div class="feature-card">
-
-<h3>
-Research Correction
-</h3>
+<h2>Conclusion</h2>
 
 <p>
-Improve academic writing.
+The research provides understanding and
+future directions related to ${topic}.
 </p>
 
-</div>
+`;
+
+},1500);
 
 
-</div>
-
-
-</section>
-
-
+}
 
 
 
 
+// Research Correction Search
 
-<section class="research-section">
-
-
-<div class="research-header">
+function searchCorrection(){
 
 
-<h2>
-Research Output
-</h2>
+let search = 
+document.getElementById("searchBox").value.toLowerCase();
 
 
-<div>
-
-
-<button onclick="copyResearch()">
-
-Copy
-
-</button>
+let output =
+document.getElementById("output");
 
 
 
-<button onclick="downloadPDF()">
+if(search==""){
 
-Download PDF
+alert("Enter correction request");
 
-</button>
+return;
 
+}
+
+
+
+output.innerHTML = 
+`
+<div class="loading-box">
+
+AI analyzing...
 
 </div>
-
-
-</div>
-
+`;
 
 
 
+setTimeout(()=>{
 
-<div id="loading" class="loading-box">
 
-<div class="loader"></div>
+let answer="";
+
+
+
+if(search.includes("title")){
+
+
+answer =
+`
+<h2>Title Correction</h2>
 
 <p>
-AI generating...
+Make your title specific.
+Include population, study design,
+and main variables.
 </p>
+`;
 
-</div>
-
-
-
+}
 
 
-<div id="output" class="output-card">
+
+else if(search.includes("abstract")){
 
 
-<h3>
-Your research output will appear here
-</h3>
-
+answer =
+`
+<h2>Abstract Improvement</h2>
 
 <p>
-Enter topic and generate research.
+Include Background, Objective,
+Methods, Results and Conclusion.
+Avoid unnecessary sentences.
 </p>
+`;
 
-
-</div>
-
-
-
-
-</section>
+}
 
 
 
+else if(search.includes("methodology")){
 
 
-
-
-<footer class="footer">
-
-
-<h3>
-ResIQ
-</h3>
-
+answer =
+`
+<h2>Methodology Correction</h2>
 
 <p>
-Smart Research. Faster Insights.
+Add study design, participants,
+sample size, data collection tools
+and statistical methods.
 </p>
+`;
 
+}
+
+
+
+else if(search.includes("grammar")){
+
+
+answer =
+`
+<h2>Academic Writing Correction</h2>
 
 <p>
-AI powered research assistant for students and researchers.
+Improve grammar, sentence structure,
+clarity and scientific tone.
 </p>
+`;
+
+}
 
 
-</footer>
+
+else{
+
+
+answer =
+`
+<h2>Research Suggestion</h2>
+
+<p>
+Review your objectives,
+research question, methodology
+and references.
+</p>
+`;
+
+}
+
+
+
+output.innerHTML = answer;
+
+
+
+},1500);
+
+
+
+}
 
 
 
 
-<script src="script.js"></script>
+
+// Copy Output
+
+function copyResearch(){
+
+let text =
+document.getElementById("output").innerText;
 
 
-</body>
+navigator.clipboard.writeText(text);
 
-</html>
+
+alert("Copied successfully");
+
+}
+
+
+
+
+
+// Download PDF
+
+function downloadPDF(){
+
+
+const { jsPDF } = window.jspdf;
+
+
+let pdf =
+new jsPDF();
+
+
+let text =
+document.getElementById("output").innerText;
+
+
+pdf.text(text,10,10);
+
+
+pdf.save("ResIQ-Research.pdf");
+
+
+}
