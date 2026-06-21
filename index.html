@@ -1,269 +1,333 @@
-// Generate Research
+<!DOCTYPE html>
+<html lang="en">
 
-function generateResearch(){
+<head>
 
-let topic = document.getElementById("topic").value;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>
+ResIQ - Smart Research. Faster Insights.
+</title>
 
-let output = document.getElementById("output");
-let loading = document.getElementById("loading");
+<link rel="stylesheet" href="style.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-if(topic==""){
-
-alert("Enter research topic");
-
-return;
-
-}
-
-
-loading.style.display="block";
-
-output.innerHTML="";
+</head>
 
 
-setTimeout(()=>{
+<body>
 
 
-loading.style.display="none";
+<div class="animated-bg"></div>
 
 
-output.innerHTML = `
+<nav class="navbar">
 
-<h2>Research Title</h2>
+<div class="logo">
 
-<p>
-AI Based Study on ${topic}
-</p>
+<div class="logo-icon">
+R
+</div>
 
 
-<h2>Abstract</h2>
+<div>
+
+<h2>
+ResIQ
+</h2>
 
 <p>
-This research focuses on ${topic}. 
-The study aims to analyze important factors,
-collect evidence and provide scientific insights.
+Smart Research. Faster Insights.
 </p>
 
-
-<h2>Introduction</h2>
-
-<p>
-${topic} is an important area of research.
-This study explores current challenges and solutions.
-</p>
-
-
-<h2>Methodology</h2>
-
-<p>
-Study design, sample size, data collection,
-and statistical analysis will be included.
-</p>
-
-
-<h2>Conclusion</h2>
-
-<p>
-The research provides understanding and
-future directions related to ${topic}.
-</p>
-
-`;
-
-},1500);
-
-
-}
-
-
-
-
-// Research Correction Search
-
-function searchCorrection(){
-
-
-let search = 
-document.getElementById("searchBox").value.toLowerCase();
-
-
-let output =
-document.getElementById("output");
-
-
-
-if(search==""){
-
-alert("Enter correction request");
-
-return;
-
-}
-
-
-
-output.innerHTML = 
-`
-<div class="loading-box">
-
-AI analyzing...
 
 </div>
-`;
+
+</div>
+
+</nav>
 
 
 
-setTimeout(()=>{
+
+<section class="hero">
 
 
-let answer="";
+<div class="hero-card">
+
+
+<div class="badge">
+AI Research Assistant
+</div>
 
 
 
-if(search.includes("title")){
+<h1>
+AI-Powered Research Assistant
+</h1>
 
 
-answer =
-`
-<h2>Title Correction</h2>
+
+<p class="hero-text">
+
+Generate research titles, abstracts,
+literature reviews and academic content.
+
+</p>
+
+
+
+
+<div class="input-container">
+
+
+<input
+type="text"
+id="topic"
+placeholder="Enter research topic"
+/>
+
+
+
+<button onclick="generateResearch()">
+
+Generate Research
+
+</button>
+
+
+</div>
+
+
+
+<br>
+
+
+<div class="input-container">
+
+
+<input
+
+type="text"
+
+id="searchBox"
+
+placeholder="Search correction or improve your research"
+
+>
+
+
+<button onclick="searchCorrection()">
+
+Search
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="features-section">
+
+
+<h2 class="section-title">
+
+Features
+
+</h2>
+
+
+
+<div class="feature-grid">
+
+
+
+<div class="feature-card">
+
+<h3>
+Research Title Generator
+</h3>
 
 <p>
-Make your title specific.
-Include population, study design,
-and main variables.
+Create research titles instantly.
 </p>
-`;
 
-}
-
+</div>
 
 
-else if(search.includes("abstract")){
 
+<div class="feature-card">
 
-answer =
-`
-<h2>Abstract Improvement</h2>
+<h3>
+Abstract Writer
+</h3>
 
 <p>
-Include Background, Objective,
-Methods, Results and Conclusion.
-Avoid unnecessary sentences.
+Generate academic abstracts.
 </p>
-`;
 
-}
-
+</div>
 
 
-else if(search.includes("methodology")){
 
 
-answer =
-`
-<h2>Methodology Correction</h2>
+<div class="feature-card">
+
+<h3>
+Literature Review
+</h3>
 
 <p>
-Add study design, participants,
-sample size, data collection tools
-and statistical methods.
+Analyze previous studies.
 </p>
-`;
 
-}
-
+</div>
 
 
-else if(search.includes("grammar")){
 
 
-answer =
-`
-<h2>Academic Writing Correction</h2>
+<div class="feature-card">
+
+<h3>
+Research Correction
+</h3>
 
 <p>
-Improve grammar, sentence structure,
-clarity and scientific tone.
+Improve academic writing.
 </p>
-`;
 
-}
-
+</div>
 
 
-else{
+</div>
 
 
-answer =
-`
-<h2>Research Suggestion</h2>
+</section>
+
+
+
+
+
+
+
+<section class="research-section">
+
+
+<div class="research-header">
+
+
+<h2>
+Research Output
+</h2>
+
+
+<div>
+
+
+<button onclick="copyResearch()">
+
+Copy
+
+</button>
+
+
+
+<button onclick="downloadPDF()">
+
+Download PDF
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div id="loading" class="loading-box">
+
+<div class="loader"></div>
 
 <p>
-Review your objectives,
-research question, methodology
-and references.
+AI generating...
 </p>
-`;
 
-}
-
-
-
-output.innerHTML = answer;
-
-
-
-},1500);
-
-
-
-}
+</div>
 
 
 
 
 
-// Copy Output
-
-function copyResearch(){
-
-let text =
-document.getElementById("output").innerText;
+<div id="output" class="output-card">
 
 
-navigator.clipboard.writeText(text);
+<h3>
+Your research output will appear here
+</h3>
 
 
-alert("Copied successfully");
+<p>
+Enter topic and generate research.
+</p>
 
-}
 
-
+</div>
 
 
 
-// Download PDF
 
-function downloadPDF(){
-
-
-const { jsPDF } = window.jspdf;
+</section>
 
 
-let pdf =
-new jsPDF();
 
 
-let text =
-document.getElementById("output").innerText;
 
 
-pdf.text(text,10,10);
+
+<footer class="footer">
 
 
-pdf.save("ResIQ-Research.pdf");
+<h3>
+ResIQ
+</h3>
 
 
-}
+<p>
+Smart Research. Faster Insights.
+</p>
+
+
+<p>
+AI powered research assistant for students and researchers.
+</p>
+
+
+</footer>
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
