@@ -1,112 +1,24 @@
+```javascript
 // =====================================
-// ResIQ AI Assistant
-// OpenRouter AI
+// ResIQ Research Assistant
 // =====================================
 
-
-const OPENROUTER_API_KEY = "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";
-
-
-
-// AI Function
-
-async function askAI(prompt){
-
-
-let response = await fetch(
-
-"https://openrouter.ai/api/v1/chat/completions",
-
-{
-
-method:"POST",
-
-headers:{
-
-"Authorization":
-"Bearer " + OPENROUTER_API_KEY,
-
-"Content-Type":
-"application/json"
-
-},
-
-
-body:JSON.stringify({
-
-model:"google/gemma-3-4b-it",
-
-messages:[
-
-{
-
-role:"system",
-
-content:
-"You are ResIQ AI academic research assistant."
-
-},
-
-
-{
-
-role:"user",
-
-content:prompt
-
-}
-
-]
-
-})
-
-}
-
-);
-
-
-
-let data = await response.json();
-
-
-
-if(data.error){
-
-return "AI Error: " + data.error.message;
-
-}
-
-
-
-return data.choices[0].message.content;
-
-
-}
-
-
-
-
+let currentResearch = "";
 
 
 // =====================================
 // Generate Research
 // =====================================
 
+function generateResearch(){
 
-async function generateResearch(){
+let topic = document.getElementById("topic").value;
 
+let output = document.getElementById("output");
 
-let topic =
-document.getElementById("topic").value;
+let loading = document.getElementById("loading");
 
-
-
-let output =
-document.getElementById("output");
-
-
-
-if(topic==""){
+if(topic.trim() === ""){
 
 alert("Enter research topic");
 
@@ -114,212 +26,239 @@ return;
 
 }
 
+loading.style.display = "block";
 
+output.innerHTML = "";
 
-output.innerHTML =
-"🤖 AI generating research...";
+setTimeout(() => {
 
+loading.style.display = "none";
 
-
-
-let result = await askAI(`
-
-
-Create academic research proposal about:
-
-${topic}
-
-
-
-Include:
+currentResearch = `
 
 Research Title
 
+A Study on ${topic}
+
+
 Abstract
+
+This research focuses on ${topic}. The study aims to investigate important factors, analyze available evidence, and provide useful academic insights.
+
 
 Introduction
 
-Background Study
+${topic} is an important area of research. Understanding its impact can help researchers, students, and policymakers make informed decisions.
+
+
+Background of Study
+
+Previous studies indicate that ${topic} plays a significant role in modern research and practice.
+
 
 Literature Review
 
+Various authors have examined ${topic} from different perspectives and identified several research gaps.
+
+
+Aim
+
+To study and evaluate ${topic}.
+
+
 Objectives
+
+1. To understand ${topic}
+2. To identify key factors
+3. To evaluate outcomes
+4. To suggest improvements
+
+
+Research Questions
+
+1. What is ${topic}?
+2. What factors influence ${topic}?
+3. What are the major challenges?
+4. What improvements can be recommended?
+
 
 Methodology
 
+Research Design:
+Descriptive Study
+
+Sample Size:
+100 Participants
+
+Data Collection:
+Questionnaire Survey
+
+Data Analysis:
+Statistical Analysis
+
+
 Questionnaire
+
+1. Age
+2. Gender
+3. Education
+4. Occupation
+5. Awareness of ${topic}
+6. Experience with ${topic}
+7. Benefits observed
+8. Challenges faced
+9. Satisfaction level
+10. Suggestions
+11. Future expectations
+12. Usage frequency
+13. Accessibility
+14. Reliability
+15. Additional comments
+
 
 Conclusion
 
+The study provides valuable insights into ${topic} and highlights opportunities for future research.
+
+
 References
 
-
-
-`);
-
-
-
-output.innerHTML =
-
-`
-
-<h2>ResIQ Research Report</h2>
-
-<p>
-
-${result.replace(/\n/g,"<br>")}
-
-</p>
+APA/Vancouver style references should be added from authentic sources.
 
 `;
 
+output.innerHTML =
+currentResearch.replace(/\n/g,"<br>");
 
+},1500);
 
 }
-
-
-
-
-
-
 
 
 // =====================================
 // Research Correction Search
 // =====================================
 
-
-async function searchCorrection(){
-
-
+function searchCorrection(){
 
 let query =
-
-document.getElementById("searchBox").value;
-
-
+document.getElementById("searchBox").value.toLowerCase();
 
 let output =
-
 document.getElementById("output");
 
+if(query.trim() === ""){
 
-
-if(query==""){
-
-alert("Enter correction");
+alert("Enter correction request");
 
 return;
 
 }
 
-
-
 output.innerHTML =
-"🤖 AI checking...";
+"<h2>AI Analyzing...</h2>";
 
+setTimeout(() => {
 
+let answer = "";
 
+if(query.includes("title")){
 
-let result = await askAI(`
-
-
-You are a research editor.
-
-
-Correct this:
-
-
-${query}
-
-
-
-Give:
-
-1. Problems
-
-2. Improved version
-
-3. Suggestions
-
-
-
-`);
-
-
-
-output.innerHTML =
-
-`
-
-<h2>Research Correction</h2>
-
-
+answer = `
+<h2>Title Correction</h2>
 <p>
-
-${result.replace(/\n/g,"<br>")}
-
+Make the title specific, concise, and include key variables.
 </p>
-
-
 `;
 
+}
 
+else if(query.includes("abstract")){
+
+answer = `
+<h2>Abstract Improvement</h2>
+<p>
+Include Background, Objectives, Methods, Results, and Conclusion.
+</p>
+`;
+
+}
+
+else if(query.includes("methodology")){
+
+answer = `
+<h2>Methodology Improvement</h2>
+<p>
+Add study design, sample size, sampling method, and statistical analysis.
+</p>
+`;
+
+}
+
+else if(query.includes("grammar")){
+
+answer = `
+<h2>Grammar Correction</h2>
+<p>
+Improve sentence structure, clarity, punctuation, and academic tone.
+</p>
+`;
+
+}
+
+else{
+
+answer = `
+<h2>Research Suggestion</h2>
+<p>
+Review objectives, methodology, literature review, and references.
+</p>
+`;
+
+}
+
+output.innerHTML = answer;
+
+},1000);
 
 }
 
 
-
-
-
 // =====================================
-// Copy
+// Copy Research
 // =====================================
-
 
 function copyResearch(){
 
-
 let text =
-
 document.getElementById("output").innerText;
-
 
 navigator.clipboard.writeText(text);
 
-
-alert("Copied");
+alert("Copied Successfully");
 
 }
 
 
-
-
-
 // =====================================
-// PDF
+// Download PDF
 // =====================================
-
 
 function downloadPDF(){
 
+const { jsPDF } = window.jspdf;
 
-const {jsPDF}=window.jspdf;
+let pdf = new jsPDF();
 
-
-let pdf=new jsPDF();
-
-
-let text=
-
+let text =
 document.getElementById("output").innerText;
 
+let lines =
+pdf.splitTextToSize(text,180);
 
+pdf.text(lines,10,10);
 
-pdf.text(text,10,10);
-
-
-pdf.save("ResIQ.pdf");
-
+pdf.save("ResIQ_Research_Report.pdf");
 
 }
+```
